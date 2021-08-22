@@ -1,5 +1,14 @@
 All knowledge based on the udemy courses:
 
+CHEATSHEET:
+		https://testing-library.com/docs/react-testing-library/cheatsheet
+		https://github.com/testing-library
+		https://github.com/testing-library/jest-dom
+		https://react-bootstrap.github.io/getting-started/introduction
+		
+		https://github.com/testing-library/user-event
+		npm install @testing-library/user-event @testing-library/dom
+
 runnig npm test start the test in watch mode
 
 {render, screen} from @testing-react-library
@@ -146,5 +155,28 @@ Add below script in index.html
 Add CSS index.js
 
 	import 'bootstrap/dist/css/bootstrap.min.css';
+	
+	
+	
+	
+UserEvent:
+	UserEvent is better than fireEvent.
+	
+screen Query Method:
+		get: expect element to be in DOM
+		query: expect element to be not in DOM
+		find: expect element to appear async.In case we want to element to appear before firing the assertion.
+		
+		* we can Add All after selector to get all match (getAll, findAll etc)
+		
+Quiery Type:
+		Role: most prefered
+		AltText: images
+		Text: non interactive display elements
+		
+		Form Elements: 
+			PlaceholderText
+			LabelText
+			DisplayText
 	
     
