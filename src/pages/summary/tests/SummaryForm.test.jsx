@@ -1,4 +1,4 @@
-import {render,screen} from '@testing-library/react'
+import { render,screen, waitForElementToBeRemoved} from '@testing-library/react'
 import SummaryForm from '../SummaryForm'
 import userEvent from '@testing-library/user-event'
 
@@ -27,5 +27,26 @@ describe('Initial testing',()=>{
         userEvent.click(checkbox)
         expect(checkbox).not.toBeChecked()
         expect(button).toBeDisabled()
+    })
+
+    test('onHover should open and close popUp',async ()=>{
+        //no popup in starting
+        
+        let  popup = screen.queryByText(/no icecream will actuall/i)
+        expect(popup).not.toBeInTheDocument()
+
+
+        //Popup appear on hover
+        const termAndCondition = screen.getByText(/terms and conditions/i)
+        userEvent.hover(termAndCondition)
+        popup = screen.queryByText(/no icecream will actuall/i)
+        expect(popup).toBeInTheDocument()
+
+
+
+        //Popup goes after unHover
+        userEvent.unhover(termAndCondition)
+        await waitForElementToBeRemoved(()=> screen.queryByText(/no icecream will actuall/i))
+        
     })
 })

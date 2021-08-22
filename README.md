@@ -2,10 +2,11 @@ All knowledge based on the udemy courses:
 
 CHEATSHEET:
 		https://testing-library.com/docs/react-testing-library/cheatsheet
-		https://github.com/testing-library
-		https://github.com/testing-library/jest-dom
-		https://react-bootstrap.github.io/getting-started/introduction
 		
+		https://github.com/testing-library
+		
+		https://github.com/testing-library/jest-dom
+		https://react-bootstrap.github.io/getting-started/introduction		
 		https://github.com/testing-library/user-event
 		npm install @testing-library/user-event @testing-library/dom
 
@@ -167,9 +168,9 @@ screen Query Method:
 		query: expect element to be not in DOM
 		find: expect element to appear async.In case we want to element to appear before firing the assertion.
 		
-		* we can Add All after selector to get all match (getAll, findAll etc)
+		* we can Add All after selector to get all match (getAllBy, findAllBy etc)
 		
-Quiery Type:
+Query Type:
 		Role: most prefered
 		AltText: images
 		Text: non interactive display elements
@@ -178,5 +179,17 @@ Quiery Type:
 			PlaceholderText
 			LabelText
 			DisplayText
+			
+Async#
+The dom-testing-library Async API is re-exported from React Testing Library.
+
+	waitFor (Promise) retry the function within until it stops throwing or times out
+	
+	waitForElementToBeRemoved (Promise) retry the function until it no longer returns a DOM node
+	
+		//Popup goes after unHover
+        userEvent.unhover(termAndCondition)
+		
+        await waitForElementToBeRemoved(()=> screen.queryByText(/no icecream will actuall/i))
 	
     
