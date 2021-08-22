@@ -191,5 +191,42 @@ The dom-testing-library Async API is re-exported from React Testing Library.
         userEvent.unhover(termAndCondition)
 		
         await waitForElementToBeRemoved(()=> screen.queryByText(/no icecream will actuall/i))
+		
+		
+Mock Service:
+	npm install msw
+		Create handlers
+		
+		
+			create src/mocks/handlers.js
+			import {rest} from 'msw'
+			export const handlers=[
+				rest.get('url',(req,res.ctx)=>{
+				return res(
+					ctx.json([
+						{kay:value},
+						{key:value}
+					])
+					)
+				})
+			]
+			
+	Create test server
+	
+			create src/mock/server.js
+			import {setupSever} from 'msw/node'
+			import {handlers} from './handlers'
+			export const server = setupSever(...handlers)
+			
+			
+	Make sure test server listen during all test
+	
+		inside setupTest.js	
+			
+			import {server} from './mock/server.js'
+			beforeAll(()=>server.listen())
+			afterAll(()=>server.close())
+			afterEach(()=>server.resetHanlders())
+		
 	
     
