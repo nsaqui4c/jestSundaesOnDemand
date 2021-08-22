@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ScoopOptions from "./ScoopOptions";
+import ToppingOptions from './ToppingOptions'
 
 export default function Options({ optionType }) {
   const [items, setItems] = useState([
@@ -15,7 +16,7 @@ export default function Options({ optionType }) {
       .catch((err) => console.log(err));
   }, [optionType]);
 
-  const ItemComponent = optionType === "scoops" ? ScoopOptions : null;
+  const ItemComponent = optionType === "scoops" ? ScoopOptions : ToppingOptions;
   const ToRender=items.length>0?(items.map((item) =>     
       <ItemComponent
         key={item.name}

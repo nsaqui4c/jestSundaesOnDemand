@@ -1,5 +1,5 @@
 import { test } from "@jest/globals";
-import { screen,render } from "@testing-library/react";
+import { screen,render, findAllByRole } from "@testing-library/react";
 
 import Options from '../Optioins'
 
@@ -17,5 +17,14 @@ describe('Testing the server response',()=>{
         expect(altname).toEqual(['chocolate scoop','vanilla scoop'])
         
 
+    })
+
+    test('Topping option should be populated',async()=>{
+
+        render(<Options optionType='toppings'/>)
+        const toppingImages= await screen.findAllByRole('img',{name:/topping$/i})
+        expect(toppingImages).toHaveLength(3)
+        const toppingNames=toppingImages.map(elem=>elem.alt)
+        expect(toppingNames).toEqual(['cherrt topping','cherry topping','cherrz topping'])
     })
 })
