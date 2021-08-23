@@ -227,6 +227,65 @@ Mock Service:
 			beforeAll(()=>server.listen())
 			afterAll(()=>server.close())
 			afterEach(()=>server.resetHanlders())
+			
+			
+Testing negative test:
+```
+describe('Negative test case for mock service worker',()=>{
+   
+    test('testing for scoop',async()=>{
+        server.resetHandlers(
+            rest.get('http://localhost:5000/scoops',(req,res,ctx)=>res(ctx.status(404)))
+        ,
+        rest.get('http://localhost:5000/toppings',(req,res,ctx)=>res(ctx.status(404)))
+        )
+
+        render(<OrderEntry/>)
+        const alert=  await screen.findAllByRole('alert',{name:/unexpected error/i})
+
+        expect(alert).toHaveLength(2)
+    })
+
+   
+})
+```
+
+The above code will not work because we are expecting 2 alert with findAllBy, but as soon as one come back findAllBy will return the result, leaving the other.
+
+waitFor:
+
+```
+describe('Negative test case for mock service worker',()=>{
+   
+    test('testing for scoop',async()=>{
+        server.resetHandlers(
+            rest.get('http://localhost:5000/scoops',(req,res,ctx)=>res(ctx.status(404)))
+        ,
+        rest.get('http://localhost:5000/toppings',(req,res,ctx)=>res(ctx.status(404)))
+        )
+
+        render(<OrderEntry/>)
+		
+		await waitFor(async ()=>{
+		const alert=  await screen.findAllByRole('alert'
+		// ,{name:/unexpected error/i}   NEED TO CHECK WHY NAME IS NOT WORKING
+		)
+
+        expect(alert).toHaveLength(2)
+		})
+        
+    })
+
+   
+})
+```
+
+
+Test.only:
+	Run only this test and skip other test in the file
+	
+test.skip:
+	skip this test and run all other test in file
 		
 	
     
