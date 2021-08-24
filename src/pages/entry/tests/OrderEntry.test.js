@@ -19,10 +19,9 @@ describe('Negative test case for mock service worker',()=>{
         await waitFor(async ()=>{
             const alert=  await screen.findAllByRole('alert'
            // ,{name:/unexpected error/i}   NEED TO CHECK WHY NAME IS NOT WORKING
-            )
-    
+            )    
             expect(alert).toHaveLength(2)
-            })
+        })
         
     })
 
